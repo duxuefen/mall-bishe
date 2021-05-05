@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 
+// 导出函数
 export function login(username, password) {
   return request({
     url: '/admin2/login',
@@ -13,7 +14,7 @@ export function login(username, password) {
 
 export function getInfo() {
   return request({
-    url: '/admin22/info',
+    url: '/admin2/info',
     method: 'get',
   })
 }
@@ -27,7 +28,7 @@ export function logout() {
 
 export function fetchList(params) {
   return request({
-    url: '/admin2/list',
+    url: '/member/searchAll',
     method: 'get',
     params: params
   })
@@ -35,7 +36,7 @@ export function fetchList(params) {
 
 export function createAdmin(data) {
   return request({
-    url: '/admin2/register',
+    url: '/member/addOne',
     method: 'post',
     data: data
   })
@@ -43,7 +44,7 @@ export function createAdmin(data) {
 
 export function updateAdmin(id, data) {
   return request({
-    url: '/admin2/update/' + id,
+    url: '/member/updateById/' + id,
     method: 'post',
     data: data
   })
@@ -59,7 +60,7 @@ export function updateStatus(id, params) {
 
 export function deleteAdmin(id) {
   return request({
-    url: '/admin2/delete/' + id,
+    url: '/member/deleteById/' + id,
     method: 'post'
   })
 }

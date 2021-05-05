@@ -152,6 +152,7 @@
   </div>
 </template>
 <script>
+  //统一全部导入
   import {fetchList,createAdmin,updateAdmin,updateStatus,deleteAdmin,getRoleByAdmin,allocRole} from '@/api/login';
   import {fetchAllRoleList} from '@/api/role';
   import {formatDate} from '@/utils/date';
@@ -177,8 +178,8 @@
         listQuery: Object.assign({}, defaultListQuery),
         list: null,
         total: null,
-        listLoading: false,
         dialogVisible: false,
+        listLoading: false,
         admin: Object.assign({}, defaultAdmin),
         isEdit: false,
         allocDialogVisible: false,

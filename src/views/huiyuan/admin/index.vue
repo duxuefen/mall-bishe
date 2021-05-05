@@ -1,5 +1,6 @@
 <template> 
   <div class="app-container">
+    <!--搜索模块-->
     <el-card class="filter-container" shadow="never">
       <div>
         <i class="el-icon-search"></i>
@@ -32,6 +33,7 @@
       <el-button size="mini" class="btn-add" @click="handleAdd()" style="margin-left: 20px">添加</el-button>
     </el-card>
     <div class="table-container">
+      <!--一开始的展示模块，展示会员记录-->
       <el-table ref="adminTable"
                 :data="list"
                 style="width: 100%;"
@@ -40,16 +42,16 @@
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="姓名" align="center">
-          <template slot-scope="scope">{{scope.row.username}}</template>
+          <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
         <el-table-column label="性别" align="center">
-          <template slot-scope="scope">{{scope.row.icon}}</template>
+          <template slot-scope="scope">{{scope.row.sex}}</template>
+        </el-table-column>
+        <el-table-column label="年龄" align="center">
+          <template slot-scope="scope">{{scope.row.age}}</template>
         </el-table-column>
         <el-table-column label="手机号" align="center">
-          <template slot-scope="scope">{{scope.row.email}}</template>
-        </el-table-column>
-        <el-table-column label="添加时间" width="160" align="center">
-          <template slot-scope="scope">{{scope.row.createTime | formatDateTime}}</template>
+          <template slot-scope="scope">{{scope.row.phone}}</template>
         </el-table-column>
 <!--        <el-table-column label="最后登录" width="160" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.loginTime | formatDateTime}}</template>-->
@@ -66,10 +68,6 @@
 <!--        </el-table-column>-->
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
-<!--            <el-button size="mini"-->
-<!--                       type="text"-->
-<!--                       @click="handleSelectRole(scope.$index, scope.row)">分配角色-->
-<!--            </el-button>-->
             <el-button size="mini"
                        type="text"
                        @click="handleUpdate(scope.$index, scope.row)">
@@ -95,24 +93,28 @@
         :total="total">
       </el-pagination>
     </div>
+    <!--添加会员模块，时间是后台进行添加-->
     <el-dialog
       :title="isEdit?'编辑用户':'添加用户'"
       :visible.sync="dialogVisible"
       width="40%">
-      <el-form :model="admin"
+      <el-form :model="member"
                ref="adminForm"
                label-width="150px" size="small">
         <el-form-item label="编号：">
-          <el-input v-model="admin.id" style="width: 250px"></el-input>
+          <el-input v-model="member.id" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="姓名：">
-          <el-input v-model="admin.username" style="width: 250px"></el-input>
+          <el-input v-model="member.username" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="性别：">
-          <el-input v-model="admin.icon" style="width: 250px"></el-input>
+          <el-input v-model="member.sex" style="width: 250px"></el-input>
+        </el-form-item>
+        <el-form-item label="年龄：">
+          <el-input v-model="member.age"  type="text" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="手机号：">
-          <el-input v-model="admin.email"  type="text" style="width: 250px"></el-input>
+          <el-input v-model="member.phone"  type="text" style="width: 250px"></el-input>
         </el-form-item>
 <!--        <el-form-item label="备注：">-->
 <!--          <el-input v-model="admin.note"-->
@@ -152,6 +154,7 @@
   </div>
 </template>
 <script>
+  //导入函数,login2对应是会员
   import {fetchList,createAdmin,updateAdmin,updateStatus,deleteAdmin,getRoleByAdmin,allocRole} from '@/api/login2';
   import {fetchAllRoleList} from '@/api/role2';
   import {formatDate} from '@/utils/date';
@@ -161,17 +164,18 @@
     pageSize: 10,
     keyword: null
   };
-  const defaultAdmin = {
-    id: null,
-    username: null,
-    password: null,
-    nickName: null,
-    email: null,
-    note: null,
+  const defaultMember = {
+    id: null, //编号
+    name: null,
+    sex: null,
+    age: null,
+    phone: null,
+    time: null,
     status: 1
   };
   export default {
     name: 'adminList',
+    //data 是函数
     data() {
       return {
         listQuery: Object.assign({}, defaultListQuery),
@@ -179,7 +183,7 @@
         total: null,
         listLoading: false,
         dialogVisible: false,
-        admin: Object.assign({}, defaultAdmin),
+        member: Object.assign({}, defaultMember),
         isEdit: false,
         allocDialogVisible: false,
         allocRoleIds:[],
@@ -220,7 +224,7 @@
       handleAdd() {
         this.dialogVisible = true;
         this.isEdit = false;
-        this.admin = Object.assign({},defaultAdmin);
+        this.admin = Object.assign({},defaultMember);
       },
       handleStatusChange(index, row) {
         this.$confirm('是否要修改该状态?', '提示', {
@@ -260,7 +264,7 @@
       handleUpdate(index, row) {
         this.dialogVisible = true;
         this.isEdit = true;
-        this.admin = Object.assign({},row);
+        this.member = Object.assign({},row);
       },
       handleDialogConfirm() {
         this.$confirm('是否要确认?', '提示', {
@@ -278,7 +282,7 @@
               this.getList();
             })
           } else {
-            createAdmin(this.admin).then(response => {
+            createAdmin(this.member).then(response => {
               this.$message({
                 message: '添加成功！',
                 type: 'success'
@@ -314,6 +318,7 @@
       },
       getList() {
         this.listLoading = true;
+        //这里使用了后端的方法admin2/list
         fetchList(this.listQuery).then(response => {
           this.listLoading = false;
           this.list = response.data.list;

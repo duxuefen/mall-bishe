@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+//安装一个插件
 Vue.use(Router)
 
 /* Layout */
@@ -395,6 +395,7 @@ export const asyncRouterMap = [
 export default new Router({
   // mode: 'history', //后端支持可开
   scrollBehavior: () => ({y: 0}),
+  //配置路由和映射之间的关系
   routes: constantRouterMap
 })
 

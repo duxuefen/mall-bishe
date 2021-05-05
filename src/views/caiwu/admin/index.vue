@@ -43,28 +43,18 @@
         <el-table-column label="操作人" align="center">
           <template slot-scope="scope">{{scope.row.username}}</template>
         </el-table-column>
-        <el-table-column label="收款金额" align="center">
+        <el-table-column label="货号" align="center">
           <template slot-scope="scope">{{scope.row.icon}}</template>
         </el-table-column>
-        <el-table-column label="交易单号" align="center">
+        <el-table-column label="数量" align="center">
           <template slot-scope="scope">{{scope.row.email}}</template>
         </el-table-column>
-        <el-table-column label="收款时间" width="160" align="center">
+        <el-table-column label="金额" align="center">
+          <template slot-scope="scope">{{scope.row.email}}</template>
+        </el-table-column>
+        <el-table-column label="创建时间" width="160" align="center">
           <template slot-scope="scope">{{scope.row.createTime | formatDateTime}}</template>
         </el-table-column>
-<!--        <el-table-column label="最后登录" width="160" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.loginTime | formatDateTime}}</template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column label="是否启用" width="140" align="center">-->
-<!--          <template slot-scope="scope">-->
-<!--            <el-switch-->
-<!--              @change="handleStatusChange(scope.$index, scope.row)"-->
-<!--              :active-value="1"-->
-<!--              :inactive-value="0"-->
-<!--              v-model="scope.row.status">-->
-<!--            </el-switch>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
 <!--            <el-button size="mini"-->
@@ -162,13 +152,13 @@
     pageSize: 10,
     keyword: null
   };
-  const defaultAdmin = {
-    id: null,
-    username: null,
-    password: null,
-    nickName: null,
-    email: null,
-    note: null,
+  const defaultFinance = {
+    id: null, //用来是编号
+    saleName: null, //用来是操作人
+    huohao: null, //用来是货号
+    quantity: null, //数量
+    money: null,
+    time: null,
     status: 1
   };
   export default {
