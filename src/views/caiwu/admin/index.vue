@@ -37,23 +37,24 @@
                 :data="list"
                 style="width: 100%;"
                 v-loading="listLoading" border>
+        <!--一开始展示的财务记录-->
         <el-table-column label="编号" width="100" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+          <template slot-scope="scope">{{scope.row.number}}</template>
         </el-table-column>
         <el-table-column label="操作人" align="center">
-          <template slot-scope="scope">{{scope.row.username}}</template>
+          <template slot-scope="scope">{{scope.row.saleName}}</template>
         </el-table-column>
         <el-table-column label="货号" align="center">
-          <template slot-scope="scope">{{scope.row.icon}}</template>
+          <template slot-scope="scope">{{scope.row.huohao}}</template>
         </el-table-column>
         <el-table-column label="数量" align="center">
-          <template slot-scope="scope">{{scope.row.email}}</template>
+          <template slot-scope="scope">{{scope.row.quantity}}</template>
         </el-table-column>
         <el-table-column label="金额" align="center">
-          <template slot-scope="scope">{{scope.row.email}}</template>
+          <template slot-scope="scope">{{scope.row.money}}</template>
         </el-table-column>
         <el-table-column label="创建时间" width="160" align="center">
-          <template slot-scope="scope">{{scope.row.createTime | formatDateTime}}</template>
+          <template slot-scope="scope">{{scope.row.time}}</template>
         </el-table-column>
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
@@ -90,20 +91,21 @@
       :title="isEdit?'编辑用户':'添加用户'"
       :visible.sync="dialogVisible"
       width="40%">
+      <!--添加财务记录-->
       <el-form :model="admin"
                ref="adminForm"
                label-width="150px" size="small">
         <el-form-item label="货号：">
-          <el-input v-model="admin.id" style="width: 250px"></el-input>
+          <el-input v-model="finance.id" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="操作人：">
-          <el-input v-model="admin.username" style="width: 250px"></el-input>
-        </el-form-item>
-        <el-form-item label="金额：">
-          <el-input v-model="admin.icon" style="width: 250px"></el-input>
+          <el-input v-model="finance.saleName" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="数量">
-          <el-input v-model="admin.email"   style="width: 250px"></el-input>
+          <el-input v-model="finance.quantity"   style="width: 250px"></el-input>
+        </el-form-item>
+        <el-form-item label="金额：">
+          <el-input v-model="finance.money" style="width: 250px"></el-input>
         </el-form-item>
 <!--        <el-form-item label="备注：">-->
 <!--          <el-input v-model="admin.note"-->
@@ -153,13 +155,13 @@
     keyword: null
   };
   const defaultFinance = {
-    id: null, //用来是编号
+    id: null,
+    number: null,
     saleName: null, //用来是操作人
     huohao: null, //用来是货号
     quantity: null, //数量
     money: null,
     time: null,
-    status: 1
   };
   export default {
     name: 'adminList',
@@ -170,7 +172,7 @@
         total: null,
         listLoading: false,
         dialogVisible: false,
-        admin: Object.assign({}, defaultAdmin),
+        finance: Object.assign({}, defaultFinance),
         isEdit: false,
         allocDialogVisible: false,
         allocRoleIds:[],
@@ -211,7 +213,7 @@
       handleAdd() {
         this.dialogVisible = true;
         this.isEdit = false;
-        this.admin = Object.assign({},defaultAdmin);
+        this.admin = Object.assign({},defaultFinance);
       },
       handleStatusChange(index, row) {
         this.$confirm('是否要修改该状态?', '提示', {
@@ -260,7 +262,7 @@
           type: 'warning'
         }).then(() => {
           if (this.isEdit) {
-            updateAdmin(this.admin.id,this.admin).then(response => {
+            updateAdmin(this.finance.id,this.finance).then(response => {
               this.$message({
                 message: '修改成功！',
                 type: 'success'
@@ -269,7 +271,7 @@
               this.getList();
             })
           } else {
-            createAdmin(this.admin).then(response => {
+            createAdmin(this.finance).then(response => {
               this.$message({
                 message: '添加成功！',
                 type: 'success'

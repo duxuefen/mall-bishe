@@ -58,9 +58,9 @@ export function updateStatus(id, params) {
   })
 }
 
-export function deleteAdmin(id) {
+export function deleteAdmin(id2) {
   return request({
-    url: '/member/deleteById/' + id,
+    url: '/member/deleteById/' + id2,
     method: 'post'
   })
 }

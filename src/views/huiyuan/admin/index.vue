@@ -101,11 +101,11 @@
       <el-form :model="member"
                ref="adminForm"
                label-width="150px" size="small">
-        <el-form-item label="编号：">
-          <el-input v-model="member.id" style="width: 250px"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="编号：">-->
+<!--          <el-input v-model="member.id" style="width: 250px"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="姓名：">
-          <el-input v-model="member.username" style="width: 250px"></el-input>
+          <el-input v-model="member.name" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="性别：">
           <el-input v-model="member.sex" style="width: 250px"></el-input>
@@ -171,7 +171,6 @@
     age: null,
     phone: null,
     time: null,
-    status: 1
   };
   export default {
     name: 'adminList',
@@ -273,7 +272,7 @@
           type: 'warning'
         }).then(() => {
           if (this.isEdit) {
-            updateAdmin(this.admin.id,this.admin).then(response => {
+            updateAdmin(this.member.id,this.member).then(response => {
               this.$message({
                 message: '修改成功！',
                 type: 'success'

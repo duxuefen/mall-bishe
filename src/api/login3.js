@@ -27,7 +27,7 @@ export function logout() {
 
 export function fetchList(params) {
   return request({
-    url: '/admin3/list',
+    url: '/finance/list',
     method: 'get',
     params: params
   })
@@ -35,15 +35,15 @@ export function fetchList(params) {
 
 export function createAdmin(data) {
   return request({
-    url: '/admin3/register',
+    url: '/finance/addOne',
     method: 'post',
     data: data
   })
 }
 
-export function updateAdmin(id, data) {
+export function updateAdmin(number, data) {
   return request({
-    url: '/admin3/update/' + id,
+    url: '/finance/updateFinance/' + number,
     method: 'post',
     data: data
   })
@@ -59,7 +59,7 @@ export function updateStatus(id, params) {
 
 export function deleteAdmin(id) {
   return request({
-    url: '/admin3/delete/' + id,
+    url: '/finance/deleteFinance/' + id,
     method: 'post'
   })
 }

@@ -360,7 +360,7 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path:'/huiyuam',
+    path:'/huiyuan',
     component: Layout,
     redirect: '/huiyuan/admin',
     name: '',
