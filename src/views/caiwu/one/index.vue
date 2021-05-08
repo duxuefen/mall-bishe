@@ -21,8 +21,7 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-input v-model="listQuery.keyword" class="input-width" placeholder="年" clearable></el-input>
-            <el-input v-model="listQuery.keyword" class="input-width" placeholder="月" clearable></el-input>
+            <el-input v-model="listQuery.keyword" class="input-width" placeholder="编号" clearable></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -54,7 +53,7 @@
           <template slot-scope="scope">{{scope.row.money}}</template>
         </el-table-column>
         <el-table-column label="创建时间" width="160" align="center">
-          <template slot-scope="scope">{{scope.row.time}}</template>
+          <template slot-scope="scope">{{scope.row.time | formatDateTime}}</template>
         </el-table-column>
         <el-table-column label="操作" width="180" align="center">
           <template slot-scope="scope">
@@ -91,21 +90,20 @@
       :title="isEdit?'编辑用户':'添加用户'"
       :visible.sync="dialogVisible"
       width="40%">
-      <!--添加财务记录-->
-      <el-form :model="admin"
+      <el-form :model="finance"
                ref="adminForm"
                label-width="150px" size="small">
         <el-form-item label="货号：">
-          <el-input v-model="finance.id" style="width: 250px"></el-input>
+          <el-input v-model="finance.huohao" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="操作人：">
           <el-input v-model="finance.saleName" style="width: 250px"></el-input>
         </el-form-item>
-        <el-form-item label="数量">
-          <el-input v-model="finance.quantity"   style="width: 250px"></el-input>
-        </el-form-item>
         <el-form-item label="金额：">
           <el-input v-model="finance.money" style="width: 250px"></el-input>
+        </el-form-item>
+        <el-form-item label="数量">
+          <el-input v-model="finance.quantity"   style="width: 250px"></el-input>
         </el-form-item>
 <!--        <el-form-item label="备注：">-->
 <!--          <el-input v-model="admin.note"-->
@@ -164,7 +162,7 @@
     time: null,
   };
   export default {
-    name: 'adminList',
+    name: 'memberList',
     data() {
       return {
         listQuery: Object.assign({}, defaultListQuery),
@@ -213,7 +211,7 @@
       handleAdd() {
         this.dialogVisible = true;
         this.isEdit = false;
-        this.admin = Object.assign({},defaultFinance);
+        this.finance = Object.assign({},defaultFinance);
       },
       handleStatusChange(index, row) {
         this.$confirm('是否要修改该状态?', '提示', {
@@ -253,7 +251,7 @@
       handleUpdate(index, row) {
         this.dialogVisible = true;
         this.isEdit = true;
-        this.admin = Object.assign({},row);
+        this.finance= Object.assign({},row);
       },
       handleDialogConfirm() {
         this.$confirm('是否要确认?', '提示', {
@@ -262,7 +260,7 @@
           type: 'warning'
         }).then(() => {
           if (this.isEdit) {
-            updateAdmin(this.finance.id,this.finance).then(response => {
+            updateAdmin(this.finance.number,this.finance).then(response => {
               this.$message({
                 message: '修改成功！',
                 type: 'success'

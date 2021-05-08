@@ -22,7 +22,7 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-input v-model="listQuery.keyword" class="input-width" placeholder="编号" clearable></el-input>
+            <el-input v-model="listQuery.keyword" class="input-width" placeholder="姓名" clearable></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -223,7 +223,7 @@
       handleAdd() {
         this.dialogVisible = true;
         this.isEdit = false;
-        this.admin = Object.assign({},defaultMember);
+        this.member = Object.assign({},defaultMember);
       },
       handleStatusChange(index, row) {
         this.$confirm('是否要修改该状态?', '提示', {

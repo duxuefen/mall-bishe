@@ -308,55 +308,54 @@ export const asyncRouterMap = [
         name: 'role',
         component: () => import('@/views/ums/role/index'),
         meta: {title: '角色列表', icon: 'ums-role'}
+      },
+      {
+        path: 'allocMenu',
+        name: 'allocMenu',
+        component: () => import('@/views/ums/role/allocMenu'),
+        meta: {title: '分配菜单'},
+        hidden: true
+      },
+      {
+        path: 'allocResource',
+        name: 'allocResource',
+        component: () => import('@/views/ums/role/allocResource'),
+        meta: {title: '分配资源'},
+        hidden: true
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: () => import('@/views/ums/menu/index'),
+        meta: {title: '菜单列表', icon: 'ums-menu'}
+      },
+      {
+        path: 'addMenu',
+        name: 'addMenu',
+        component: () => import('@/views/ums/menu/add'),
+        meta: {title: '添加菜单'},
+        hidden: true
+      },
+      {
+        path: 'updateMenu',
+        name: 'updateMenu',
+        component: () => import('@/views/ums/menu/update'),
+        meta: {title: '修改菜单'},
+        hidden: true
+      },
+      {
+        path: 'resource',
+        name: 'resource',
+        component: () => import('@/views/ums/resource/index'),
+        meta: {title: '资源列表', icon: 'ums-resource'}
+      },
+      {
+        path: 'resourceCategory',
+        name: 'resourceCategory',
+        component: () => import('@/views/ums/resource/categoryList'),
+        meta: {title: '资源分类'},
+        hidden: true
       }
-      // ,
-      // {
-      //   path: 'allocMenu',
-      //   name: 'allocMenu',
-      //   component: () => import('@/views/ums/role/allocMenu'),
-      //   meta: {title: '分配菜单'},
-      //   hidden: true
-      // },
-      // {
-      //   path: 'allocResource',
-      //   name: 'allocResource',
-      //   component: () => import('@/views/ums/role/allocResource'),
-      //   meta: {title: '分配资源'},
-      //   hidden: true
-      // },
-      // {
-      //   path: 'menu',
-      //   name: 'menu',
-      //   component: () => import('@/views/ums/menu/index'),
-      //   meta: {title: '菜单列表', icon: 'ums-menu'}
-      // },
-      // {
-      //   path: 'addMenu',
-      //   name: 'addMenu',
-      //   component: () => import('@/views/ums/menu/add'),
-      //   meta: {title: '添加菜单'},
-      //   hidden: true
-      // },
-      // {
-      //   path: 'updateMenu',
-      //   name: 'updateMenu',
-      //   component: () => import('@/views/ums/menu/update'),
-      //   meta: {title: '修改菜单'},
-      //   hidden: true
-      // },
-      // {
-      //   path: 'resource',
-      //   name: 'resource',
-      //   component: () => import('@/views/ums/resource/index'),
-      //   meta: {title: '资源列表', icon: 'ums-resource'}
-      // },
-      // {
-      //   path: 'resourceCategory',
-      //   name: 'resourceCategory',
-      //   component: () => import('@/views/ums/resource/categoryList'),
-      //   meta: {title: '资源分类'},
-      //   hidden: true
-      // }
     ]
   },
   {
@@ -377,15 +376,15 @@ export const asyncRouterMap = [
   {
     path:'/caiwu',
     component: Layout,
-    redirect: '/caiwu/admin',
+    redirect: '/caiwu/one',
     name: '',
     meta: {title: '财务管理', icon: 'total-yesterday'},
     children: [
       {
-        path: 'admin',
-        name: 'admin',
-        component: () => import('@/views/caiwu/admin/index'),
-        meta: {title: '财务管理', icon: 'total-yesterday'}
+        path: 'one',
+        name: 'one',
+        component: () => import('@/views/caiwu/one/index'),
+        meta: {title: '财务流水', icon: 'total-yesterday'}
       },
     ]
   },
