@@ -56,7 +56,7 @@
         <el-input v-model="value.sort"></el-input>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button type="primary" size="medium" @click="handleNext('productInfoForm')">下一步，填写商品促销</el-button>
+        <el-button type="primary" size="medium" @click="handleNext('productAttrForm')">下一步，填写商品属性</el-button>
       </el-form-item>
     </el-form>
   </div>

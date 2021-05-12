@@ -162,7 +162,7 @@
     time: null,
   };
   export default {
-    name: 'memberList',
+    name: 'financeList',
     data() {
       return {
         listQuery: Object.assign({}, defaultListQuery),
